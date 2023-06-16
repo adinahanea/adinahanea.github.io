@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Generator</title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;"> -->
+		<link href="style.css" rel="stylesheet">
+		<link href="stuff.css" rel="stylesheet">
+		<!-- animation scripts-
+		<script type="text/javascript" src="anim.js"></script> -->
+		<script type="text/javascript" src="try.js"></script>
+
+		
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a href="#home" onclick="hideShow()">Elements Generator</a>
+			<a href="#info-HDIW" onclick="hideOther()">How does it work?</a>
+
+			<a href="#result" onclick="pasteText()">See result</a>
+		</div>
+		  
+		<div>
+	
+			<script type="module" src="tjs-model.js"></script>
+		</div>	
+		<div>
+			<div class="box overlay">
+			<div class="text">
+					
+					<h3 id="home"><span>I want to generate...</span></h3>
+		
+					<label class="selection">a Number
+						<input type="radio" name="radio" id="anr" onclick="showSelection()">
+						<span class="checkmark"></span>
+					</label>
+					<br>
+					<label class="selection">a Password
+						<input type="radio" checked="checked" name="radio" id="apass" onclick="showSelection()" >
+						<span class="checkmark"></span>
+					</label>
+					<br>
+					<label class="selection">a Custom Password
+						<input type="radio" name="radio" id="acpass" onclick="showSelection()">
+						<span class="checkmark"></span>
+					</label>
+					<br>
+					<p><span id="what">Your number is on the way!</span> Just one more step!</p>
+					
+					<div id="custom-conditions" >
+						<input type="checkbox" name="checkPreferences" id="specialCharacters"  >
+						<label for="specialCharacters">Allow special characters</label><br>
+						
+						<input type="checkbox" name="checkPreferences" id="nrs"  >
+						<label for="nrs">Allow numbers</label><br>
+		
+						<input type="checkbox" name="checkPreferences" id="upCase"  >
+						<label for="upCase">Allow uppercase letters</label><br><br>
+		
+						<button id="customBtn" value="nr">Save selection</button>
+					</div>
+					
+		
+					
+					<div class="clearfix">
+
+						<input type="number" value="5" id="resultLength" max="100">
+						<p>Choose the length</p>
+					</div>
+					
+					<button id="genBtn" value="nr">Press me!</button>
+					<p id="demo"></p>
+					<p>Try this too...</p>
+					<button class="stopResumeBtn" id='stopAnim' onclick="stopResume()">Stop Animation</button>
+					<button class="stopResumeBtn" id='newAnim' onclick="newAnimation()">New Animation</button>
+			</div>
+			</div>
+		
+			<div class="box overlay" id="info-HDIW">
+			
+				<p>We created lots of playful cubes. Together they create Number or Character sequences. Watch them interact with one another and get your own sequence when ready!</p>
+		
+				<p>Generate Random Number will give you a unknown length number, while Generate Password will give you your very original password</p>
+				
+
+				<h4 style="color:#2196F3">Steps to follow...</h4>
+
+				<p>1.Choose what you want to generate</p>
+				<p>2.Select the length</p>
+				<p>3.Hit the Press me! button to generate. The result will be copied to your clipboard</p>
+				<p>Enjoy!</p>
+				<br>
+				<button onclick="hideOther()">Hide info view</button>
+			</div>
+		
+		
+			
+
+			<div id="resultpop" class="popup">
+				<h2>Your result is...</h2>
+				<a class="close" href="#" onclick="closeResult()">&times;</a>
+				<div id="resultdemo">
+					Nothing here yet!
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	</html> 
