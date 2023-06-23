@@ -48,7 +48,7 @@
 						<span class="checkmark"></span>
 					</label>
 					<br>
-					<p><span id="what">Your number is on the way!</span> Just one more step!</p>
+					<p><span id="what">Your password is on the way!</span> Just one more step!</p>
 					
 					<div id="custom-conditions" >
 						<input type="checkbox" name="checkPreferences" id="specialCharacters"  >
@@ -56,6 +56,9 @@
 						
 						<input type="checkbox" name="checkPreferences" id="nrs"  >
 						<label for="nrs">Allow numbers</label><br>
+
+						<input type="checkbox" name="checkPreferences" id="letters"  >
+						<label for="letters">Allow letters</label><br>
 		
 						<input type="checkbox" name="checkPreferences" id="upCase"  >
 						<label for="upCase">Allow uppercase letters</label><br><br>
@@ -71,7 +74,7 @@
 						<p>Choose the length</p>
 					</div>
 					
-					<button id="genBtn" value="nr">Press me!</button>
+					<button id="genBtn" value="nr">Generate!</button>
 					<p id="demo"></p>
 					<p>Try this too...</p>
 					<button class="stopResumeBtn" id='stopAnim' onclick="stopResume()">Stop Animation</button>
@@ -81,16 +84,18 @@
 		
 			<div class="box overlay" id="info-HDIW">
 			
-				<p>We created lots of playful cubes. Together they create Number or Character sequences. Watch them interact with one another and get your own sequence when ready!</p>
+				<p>We created lots of playful spheres. Together they create Number or Character sequences. Watch them and interact with them by using the mouse to disturb the spheres*, Zoom In or Zoom Out, Drag and Move the model .</p>
 		
-				<p>Generate Random Number will give you a unknown length number, while Generate Password will give you your very original password</p>
+				<p>*only available in Original mode</p>
 				
 
 				<h4 style="color:#2196F3">Steps to follow...</h4>
 
 				<p>1.Choose what you want to generate</p>
+				<p>1.1.If you choose Custom Password, you may select the types of characters your output will have</p>
+				<p>1.2.Regardless of what you select here, press Save Selection before moving to the next step</p>
 				<p>2.Select the length</p>
-				<p>3.Hit the Press me! button to generate. The result will be copied to your clipboard</p>
+				<p>3.Hit the Generate! button to generate. The result will be copied to your clipboard</p>
 				<p>Enjoy!</p>
 				<br>
 				<button onclick="hideOther()">Hide info view</button>

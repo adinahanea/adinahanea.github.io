@@ -88,6 +88,8 @@ function showSelection() {
     document.getElementById("demo").innerHTML="";
   } 
 
+  
+
 }
 
 function stopResume() {

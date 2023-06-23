@@ -3,14 +3,16 @@ import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
 
 
-			let group, camera, scene, renderer, controls;
+			
 			let particle=[];
 
 			var pointer = new THREE.Vector3();
 			let copycam = new THREE.Vector3();
 
 			
-			const particleCount=10000;
+			const particleCount=15000;
+
+			let group, camera, scene, renderer, controls;
 		
 			init();
 			animate();
@@ -34,11 +36,9 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				// controls
 
 				controls = new OrbitControls( camera, renderer.domElement );
-				controls.listenToKeyEvents( window ); // optional
+				controls.listenToKeyEvents( window ); 
 
-				//controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
-
-				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.enableDamping = true; 
 				controls.dampingFactor = 0.05;
 
 				controls.screenSpacePanning = false;
@@ -70,8 +70,6 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				var nrItems = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 				var symbolItems = ['@', '#', '$', '%', '^', '&', '_'];
 				
-				// var items = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
-				// 				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '@', '#', '$', '%', '^', '&', '_', 1, 2, 3, 4, 5, 6, 7, 8, 9];
 				var items = lowItems.concat(highItems, nrItems, symbolItems);
 
 
@@ -182,7 +180,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 						particle[i].userKey=i;
 					}
 				}
-				if(values.toString()==="") {
+				if(values.toString()==="letters") {
 					items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 					for(var i in particle) {
 						particle[i].userData = items[Math.floor(Math.random()*items.length)];
@@ -221,17 +219,14 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				}
 				return result;
 			}
-			//copy
+			
 			async function copyRes() {
 				document.getElementById("resultpop").style.display = "none";
-				//obj position
 				scene.updateMatrixWorld(true);
 				var position = new THREE.Vector3();
 				position.setFromMatrixPosition( particle[1].matrixWorld );
 
 				var txt = distance();
-				
-    			//	document.getElementById("demo").innerHTML=txt;
 				
 				try{
 					await navigator.clipboard.writeText(txt);
@@ -249,22 +244,21 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				var random = Math.floor(Math.random()*4);
 				switch(random){
 				case 0:
-					particle[i].position.x +=Math.random()*50;
+					particle[i].position.x +=Math.random()*100;
 					break;
 				case 1:
-					particle[i].position.y+=Math.random()*50;
+					particle[i].position.y+=Math.random()*100;
 					break;
 				case 2:
-					particle[i].position.x-=Math.random()*50;
+					particle[i].position.x-=Math.random()*100;
 					break;
 				case 3:
-					particle[i].position.y-=Math.random()*50;
+					particle[i].position.y-=Math.random()*100;
 					break;
 				}
 			}
 
 			function onPointerMove( event ) {
-				// Update the mouse variable
 				event.preventDefault();
 				pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
 				pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
@@ -276,20 +270,15 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 			}
 
 			function mouseMove() {
-				// Make the sphere follow the mouse
 				var vector = new THREE.Vector3(pointer.x, pointer.y, 1);
 				vector.unproject( camera );
 				var dir = vector.sub( camera.position ).normalize();
 				var distance = - camera.position.z / dir.z;
 				var pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
-				//mesh.position.copy(pos);
-			
+				
 				for(var i in particle) {
-					if(particle[i].position.distanceTo(pos)<=250) {
-										
-					// particle[i].position.x +=5;
-					// particle[i].position.y +=2;
-					callRandomFunction(i);
+					if(particle[i].position.distanceTo(pos)<=500) {
+						callRandomFunction(i);
 					}
 				}
 			}
@@ -309,8 +298,8 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 			}		
 
 			function movement1() {
-				group.rotation.y -=0.001;
-				group.rotation.x +=0.001;
+				group.rotation.y -=0.007;
+				group.rotation.x +=0.003;
 				
 			} 
 			function movement2() {
@@ -329,7 +318,6 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 
 				requestAnimationFrame( animate );
 
-				
 				if(document.getElementById('stopAnim').innerHTML=='Stop Animation') {
 					if(document.getElementById('newAnim').innerHTML=='New Animation') {
 						movement1();
