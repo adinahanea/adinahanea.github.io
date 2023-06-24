@@ -5,18 +5,15 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 
 			
 			let particle=[];
+			const particleCount=15000;
 
 			var pointer = new THREE.Vector3();
 			let copycam = new THREE.Vector3();
-
-			
-			const particleCount=15000;
 
 			let group, camera, scene, renderer, controls;
 		
 			init();
 			animate();
-			
 
 			function init() {
 
@@ -130,69 +127,124 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				checkboxes.forEach((checkbox) => {
 					values.push(checkbox.id);
 				});
-				//alert(values);
+				alert(values);
+				var lowItems = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+				var highItems =['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+				var nrItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+				var symbolItems = ['@', '#', '$', '%', '^', '&', '_'];
 
-				if(values.toString()==="specialCharacters,nrs,upCase") {
+
+				if(values.toString()==="specialCharacters,nrs,letters,upCase") {
 					selectedPass();
 				}
+				if(values.toString()==="specialCharacters,nrs,letters") {
+					items = symbolItems.concat(nrItems, lowItems);
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
+				if(values.toString()==="specialCharacters,nrs,upCase") {
+					items = symbolItems.concat(nrItems, highItems);
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
+				if(values.toString()==="specialCharacters,letters,upCase") {
+					items = symbolItems.concat(lowItems, highItems);
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
+				if(values.toString()==="nrs,letters,upCase") {
+					items = nrItems.concat(lowItems, highItems);
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
 				if(values.toString()==="specialCharacters,nrs") {
-					items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '@', '#', '$', '%', '^', '&', '_', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+					items = symbolItems.concat(nrItems);
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
+				if(values.toString()==="specialCharacters,letters") {
+					items = symbolItems.concat(lowItems);
 					for(var i in particle) {
 						particle[i].userData = items[Math.floor(Math.random()*items.length)];
 						particle[i].userKey=i;
 					}
 				}
 				if(values.toString()==="specialCharacters,upCase") {
-					items = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '@', '#', '$', '%', '^', '&', '_'];
+					items = symbolItems.concat(highItems);
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
+				if(values.toString()==="nrs,letters") {
+					items = nrItems.concat(lowItems);
 					for(var i in particle) {
 						particle[i].userData = items[Math.floor(Math.random()*items.length)];
 						particle[i].userKey=i;
 					}
 				}
 				if(values.toString()==="nrs,upCase") {
-					items = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-				for(var i in particle) {
-					particle[i].userData = items[Math.floor(Math.random()*items.length)];
-					particle[i].userKey=i;
-				}
-				}
-				if(values.toString()==="specialCharacters") {
-					items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '@', '#', '$', '%', '^', '&', '_'];
+					items = nrItems.concat(highItems);
 					for(var i in particle) {
 						particle[i].userData = items[Math.floor(Math.random()*items.length)];
 						particle[i].userKey=i;
 					}
 				}
-				if(values.toString()==="upCase") {
-					items = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+				if(values.toString()==="letters,upCase") {
+					items = lowItems.concat(highItems);
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
+				if(values.toString()==="specialCharacters") {
+					items = symbolItems;
 					for(var i in particle) {
 						particle[i].userData = items[Math.floor(Math.random()*items.length)];
 						particle[i].userKey=i;
 					}
 				}
 				if(values.toString()==="nrs") {
-					items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+					items = nrItems;
 					for(var i in particle) {
 						particle[i].userData = items[Math.floor(Math.random()*items.length)];
 						particle[i].userKey=i;
 					}
 				}
 				if(values.toString()==="letters") {
-					items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+					items = lowItems;
 					for(var i in particle) {
 						particle[i].userData = items[Math.floor(Math.random()*items.length)];
 						particle[i].userKey=i;
 					}
 				}
+				if(values.toString()==="upCase") {
+					items = highItems;
+					for(var i in particle) {
+						particle[i].userData = items[Math.floor(Math.random()*items.length)];
+						particle[i].userKey=i;
+					}
+				}
+				if(values.toString()==="") {
+					document.getElementById("what").innerHTML="You have to check AT LEAST 1 box in the list bellow!";
+				}
+				
 			}
 
 			function distance() {
 				var min=15000;
 				var part = [];
-				var dist, index;
+				var dist;
 
 				copycam.x= camera.position.x;
 				copycam.y= camera.position.y;
@@ -283,11 +335,6 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				}
 			}
 
-			
-
-
-		
-
 			function onWindowResize() {
 
 				camera.aspect = window.innerWidth / window.innerHeight;
@@ -302,6 +349,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				group.rotation.x +=0.003;
 				
 			} 
+
 			function movement2() {
 
 				for(var i in particle) {
@@ -312,7 +360,6 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				}
 				
 			}
-
 
 			function animate() { 
 
