@@ -127,7 +127,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.126.1/examples/jsm/cont
 				checkboxes.forEach((checkbox) => {
 					values.push(checkbox.id);
 				});
-				alert(values);
+				//alert(values);
 				var lowItems = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 				var highItems =['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 				var nrItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
